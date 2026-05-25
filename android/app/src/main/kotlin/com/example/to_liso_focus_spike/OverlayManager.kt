@@ -20,10 +20,15 @@ class OverlayManager(private val context: Context) {
 
     private var overlayView: View? = null
 
-    fun show(packageName: String) {
+    fun isShowing() = overlayView != null
 
+    fun show(
+        packageName: String,
+        onAnalyze: () -> Unit,
+        onRelease: () -> Unit,
+    ) {
         if (!Settings.canDrawOverlays(context)) {
-            Log.w(tag, "Permissão de overlay não concedida")
+            Log.w(tag, "Permissão SYSTEM_ALERT_WINDOW não concedida")
             return
         }
 
@@ -31,9 +36,12 @@ class OverlayManager(private val context: Context) {
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+            // FLAG_LAYOUT_IN_SCREEN: ocupa toda a tela incluindo status bar
+            // Sem FLAG_NOT_TOUCH_MODAL: overlay captura TODOS os toques da tela
+            // Sem FLAG_NOT_FOCUSABLE: overlay captura eventos de tecla (volume, back)
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             PixelFormat.TRANSLUCENT
         ).apply {
             gravity = Gravity.CENTER
@@ -45,20 +53,27 @@ class OverlayManager(private val context: Context) {
         overlayView?.findViewById<TextView>(R.id.tv_package)
             ?.text = packageName
 
+        overlayView?.findViewById<Button>(R.id.btn_analyze)
+            ?.setOnClickListener {
+                onAnalyze()
+                hide()
+            }
+
         overlayView?.findViewById<Button>(R.id.btn_release)
             ?.setOnClickListener {
+                onRelease()
                 hide()
             }
 
         windowManager.addView(overlayView, params)
-
-        Log.d(tag, "Overlay exibido")
+        Log.d(tag, "Overlay modal exibido para: $packageName")
     }
 
     fun hide() {
         overlayView?.let {
             windowManager.removeView(it)
             overlayView = null
+            Log.d(tag, "Overlay removido")
         }
     }
 }
