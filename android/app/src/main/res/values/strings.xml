@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spike Foco</string>
+
+    <string name="accessibility_description">
+        Detecta quando você abre um app bancário e exibe um lembrete.
+        Nenhum dado da tela é lido ou armazenado.
+    </string>
+</resources>
