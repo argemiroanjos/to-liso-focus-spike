@@ -291,10 +291,10 @@ Configurações → Acessibilidade → Serviços instalados
 ```
 
 <div align="center">
-  <img src=".github/assets/accessibility_01.jpeg" width="220" alt="Acessibilidade - passo 1" />
-  <img src=".github/assets/accessibility_02.jpeg" width="220" alt="Acessibilidade - passo 2" />
-  <img src=".github/assets/accessibility_03.jpeg" width="220" alt="Acessibilidade - passo 3" />
-  <img src=".github/assets/accessibility_04.jpeg" width="220" alt="Acessibilidade - passo 4" />
+  <img src=".github/assets/accessibility_01.jpeg" width="240" alt="Acessibilidade - passo 1" />
+  <img src=".github/assets/accessibility_02.jpeg" width="240" alt="Acessibilidade - passo 2" />
+  <img src=".github/assets/accessibility_03.jpeg" width="240" alt="Acessibilidade - passo 3" />
+  <img src=".github/assets/accessibility_04.jpeg" width="240" alt="Acessibilidade - passo 4" />
 </div>
 
 > ⚠️ As duas permissões são necessárias. O app verifica o status de cada uma
